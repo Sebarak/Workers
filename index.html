@@ -9,12 +9,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
     <script src="https://kit.fontawesome.com/1267997e0d.js" crossorigin="anonymous"></script>
     <style>
+        :root {
+            --border-color: #66FCF1;
+            --background-color: #0B0C10;
+            --hover-border-color: #45A29E;
+            --hover-color: #1F2833;
+            --text-color: #c5c6c7;
+            --hover-element: #0E1722;
+        }
         body {
-            background-color: #ffddc8;
+            background-color: var(--background-color);
             margin: 0;
             padding: 0;
+            color: var(--text-color);
+            font-family: monospace;
+            font-weight: 400;
         }
-
+        .close_browser{
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: .8rem;
+            font-weight: 500;
+            border: 3px solid var(--border-color);
+            background-color: var(--hover-color);
+            border-radius: 10px;
+            padding: 5px 10px;
+        }
+        .close_browser:hover{
+            cursor: pointer;
+            transition: all .2s ease-in-out;
+            transform: scale(1.04);
+            background-color: var(--hover-element);
+        }
         .container {
             margin: 0 auto;
             display: flex;
@@ -23,140 +50,134 @@
             align-items: center;
             height: 100vh;
         }
-
         .todo {
             position: fixed;
             font-size: 1rem;
-            background-color: #eeccb7;
+            background-color: var(--hover-color);
             padding: 10px 30px;
             height: 100vh;
-            border-right: black 3px solid;
-            transition: left .4s ease-in-out;
-            left: -505px;
+            border-right: var(--border-color) 3px solid;
+            transition: transform .4s ease-in-out;
+            transition: background-color .4s ease-in-out;
+            transform: translateX(-100%);
         }
-
         .show {
-            left: 0;
+            transform: translateX(0);
         }
-
         .arrow {
             font-size: 2rem;
             font-weight: 600;
             font-family: "Font Awesome 6 Free", sans-serif;
-            background-color: #eeccb7;
+            background-color: var(--hover-color);
             position: absolute;
             top: 40px;
             right: -49px;
             border-radius: 0 50% 50% 0;
             padding: 15px 20px 15px 10px;
-            border-right: 3px solid black;
-            border-top: 3px solid black;
-            border-bottom: 3px solid black;
+            border-right: 3px solid var(--border-color);
+            border-top: 3px solid var(--border-color);
+            border-bottom: 3px solid var(--border-color);
+            transition: background-color .4s ease-in-out;
         }
-
         .revArrow {
             transform: scale(-1, 1);
             border-radius: 50% 0 0 50%;
             padding: 15px 10px 15px 20px;
-            border-left: 3px solid black;
+            border-left: 3px solid var(--border-color);
             border-right: none;
         }
-
         .arrow:hover {
-            background-color: #ddbba6;
+            background-color: var(--hover-element);
             cursor: pointer;
         }
-
         .add_worker {
-            border: 1px solid black;
             padding: 2px;
             display: flex;
             flex-direction: column;
         }
-
         .add_worker section {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 5px;
-            border: 1px solid black;
             margin-bottom: 2px;
         }
-
         .add_worker section:last-of-type {
             margin-bottom: 0;
         }
-
         .add_worker section input {
             margin: 5px 0;
+            background: var(--background-color);
+            outline: none;
+            border: none;
+            padding: 10px;
+            color: var(--text-color);
+            font-family: monospace;
+            font-size: 1rem
         }
-
-
         .holder {
             width: calc(100% + 100px);
             padding: 10px 0 30px 0;
             display: flex;
             justify-content: space-between;
         }
-
         .submit {
-            width: 100%;
+            width: calc(100% - 10px);
             height: 33px;
             margin: 5px auto;
-            border: 1px solid black;
+            border: 1px solid var(--border-color);
             border-radius: 2px;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 1.5rem;
-            background-color: #eeccb7;
+            background-color: var(--hover-color);
+            color: var(--text-color);
         }
-
         .submit:hover {
             cursor: pointer;
             transform: scale(1.01);
             transition: transform .1s ease-in-out;
-            background-color: #ddbba6;
+            background-color: var(--hover-element);
         }
-
         .add_form {
             display: flex;
             justify-content: center;
             flex-direction: column;
         }
-
         .department_salary {
             margin: 0 auto;
+            width: 100%;
         }
-
+        .departments > div{
+            max-height: 250px;
+            overflow: auto;
+        }
         .search {
             position: fixed;
             font-size: 2rem;
             top: 40px;
             right: 40px;
             padding: 15px;
-            border: 3px solid black;
+            border: 3px solid var(--border-color);
             border-radius: 50%;
-            background-color: #eeccb7;
+            background-color: var(--hover-color);
 
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         .search:hover {
-            background-color: #ddbba6;
+            background-color: var(--hover-element);
             cursor: pointer;
         }
-
         .search_form {
             position: relative;
             width: 70vw;
             height: 80vh;
-            background-color: #eeccb7;
+            background-color: var(--hover-color);
             border-radius: 20px;
         }
-
         .add_search_holder {
             position: fixed;
             width: 100vw;
@@ -170,14 +191,12 @@
             justify-content: center;
             align-items: center;
         }
-
         .close {
             position: absolute;
             top: 20px;
             right: 25px;
             font-size: 1.5rem;
         }
-
         .close:hover {
             cursor: pointer;
             transform: scale(1.2);
@@ -188,13 +207,44 @@
             display: flex;
             flex-direction: column;
         }
+        .searching_form > .searching_form_holder input[type='text']{
+            margin: 5px 0;
+            background: var(--background-color);
+            outline: none;
+            border: none;
+            padding: 10px;
+            color: var(--text-color);
+            font-family: monospace;
+            font-size: 1rem;
+            width: calc(50% - 20px);
+        }
+        .searching_form_holder #department{
+            margin: 5px 0;
+            background: var(--background-color);
+            outline: none;
+            border: none;
+            padding: 10px;
+            color: var(--text-color);
+            font-family: monospace;
+            font-size: 1rem;
+            width: 50%;
+        }
+        .searching_form_holder #department:hover{
+            cursor: pointer;
+        }
+        option[value='']{
+            margin: 0 auto;
+        }
         .searching_form_holder{
             margin: 10px 0;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
         }
         .searching_form_holder:last-of-type{
             flex-direction: column;
+            align-items: normal;
         }
         .values{
             display: inline;
@@ -225,34 +275,53 @@
         .slider{
             width: 100%;
             height: 5px;
-            background-color: #d5d5d5;
+            background-color: var(--border-color);
             position: absolute;
             margin: auto;
             top: 0;
             bottom: 0;
             border-radius: 5px;
         }
-        /*input[type='range']::-webkit-slider-runnable-track{*/
-        /*    appearance: none;*/
-        /*    height: 5px;*/
-        /*}*/
         input[type='range']::-webkit-slider-thumb{
             appearance: none;
             height: 1.5em;
             width: 1.5em;
-            background-color: #3264fe;
+            background-color: var(--border-color);
             cursor:pointer;
             border-radius: 50%;
             pointer-events: auto;
             margin-top: -1px;
         }
+        input[type='number']::-webkit-outer-spin-button,
+        input[type='number']::-webkit-inner-spin-button{
+            appearance: none;
+        }
         .search_title{
             left: 25%;
             position: relative;
         }
-        .search_title + table{
+        .table_holder::-webkit-scrollbar{
+            width: 15px;
+            height: 5px;
+            background-color: var(--hover-element);
+        }
+        .table_holder::-webkit-scrollbar-track{
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+        .table_holder::-webkit-scrollbar-thumb{
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+        .table_holder{
             position: relative;
             left: 25%;
+            width: 50%;
+            height: 120px;
+            overflow: auto;
+        }
+        .table_holder > table{
+            width: 100%;
         }
         .searched_workers{
             max-height: 400px;
@@ -260,12 +329,12 @@
         .add_form_holder{
             position: relative;
             width: 70vw;
-            background-color: #eeccb7;
+            background-color: var(--hover-color);
             border-radius: 20px;
             display: flex;
             align-items: center;
             flex-direction: column;
-            padding-bottom: 30px;
+            padding: 20px 10px 40px 10px;
         }
         .add {
             position: fixed;
@@ -273,17 +342,16 @@
             top: 120px;
             right: 40px;
             padding: 15px 17px;
-            border: 3px solid black;
+            border: 3px solid var(--border-color);
             border-radius: 50%;
-            background-color: #eeccb7;
+            background-color: var(--hover-color);
 
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         .add:hover {
-            background-color: #ddbba6;
+            background-color: var(--hover-element);
             cursor: pointer;
         }
         .trash{
@@ -291,10 +359,10 @@
             justify-content: center;
             align-items: center;
             padding: 2px 2px;
-            color: #a20202;
+            color: #a42222;
         }
         .trash:hover{
-            transform: scale(1.02);
+            transform: scale(1.03);
             transition: transform ease-in-out .2s;
             cursor:pointer;
             color: #a10101;
@@ -307,6 +375,47 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%,-100%);
+        }
+        .search_button{
+            color: var(--text-color);
+            background: var(--hover-color);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .search_button:hover{
+            transform: scale(1.04);
+            transition: transform .2s ease-in-out;
+            cursor:pointer;
+            background-color: var(--hover-element);
+        }
+        .workers > table > tbody > div{
+            max-height: 250px;
+            overflow: auto;
+        }
+        .workers > table > tbody > div::-webkit-scrollbar{
+            width: 15px;
+            height: 5px;
+            background-color: var(--hover-element);
+            border-radius: 10px;
+        }
+        .workers > table > tbody > div::-webkit-scrollbar-track{
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+        .workers > table > tbody > div::-webkit-scrollbar-thumb{
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+        .workers_sum{
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .salary{
+            text-align: right;
         }
     </style>
 </head>
@@ -392,7 +501,7 @@
         const salaries = [];
 
         React.useEffect(() => {
-            if (JSON.parse(localStorage.getItem('Workers')).length === 0){
+            if (localStorage.getItem('Workers') === null || JSON.parse(localStorage.getItem('Workers')).length === 0){
                 setWorkers(true);
             }
             if (localStorage.getItem('Workers') === null){
@@ -522,7 +631,7 @@
                 }
                 displayMinValue.textContent = firstSlider.value;
                 const slider = document.querySelector('.slider');
-                slider.style.background = `linear-gradient(to right, #dadae5 ${firstSlider.value / salaryMax * 100}%, #3264fe ${firstSlider.value / salaryMax * 100}%, #3264fe ${secondSlider.value / salaryMax * 100}%, #dadae5 ${secondSlider.value / salaryMax * 100}%)`
+                slider.style.background = `linear-gradient(to right, #0E1722 ${firstSlider.value / salaryMax * 100}%, #66FCF1 ${firstSlider.value / salaryMax * 100}%, #66FCF1 ${secondSlider.value / salaryMax * 100}%, #0E1722 ${secondSlider.value / salaryMax * 100}%)`
         }
 
         const Change2 = e => {
@@ -534,7 +643,7 @@
             }
             displayMaxValue.textContent = secondSlider.value;
             const slider = document.querySelector('.slider');
-            slider.style.background = `linear-gradient(to right, #dadae5 ${firstSlider.value / salaryMax * 100}%, #3264fe ${firstSlider.value / salaryMax * 100}%, #3264fe ${secondSlider.value / salaryMax * 100}%, #dadae5 ${secondSlider.value / salaryMax * 100}%)`
+            slider.style.background = `linear-gradient(to right, #0E1722 ${firstSlider.value / salaryMax * 100}%, #66FCF1 ${firstSlider.value / salaryMax * 100}%, #66FCF1 ${secondSlider.value / salaryMax * 100}%, #0E1722 ${secondSlider.value / salaryMax * 100}%)`
 
         }
 
@@ -621,25 +730,25 @@
                                 <div className="add_worker">
                                     <section>
                                         <label htmlFor="name">Name: </label>
-                                        <input type="text" id="name" placeholder="Rob" value={name} onChange={e => {
+                                        <input type="text" id="name" placeholder="Rob" autoComplete="off" value={name} onChange={e => {
                                             setName(e.currentTarget.value)
                                         }}/>
                                     </section>
                                     <section>
                                         <label htmlFor="surname">Surname: </label>
-                                        <input type="text" id="surname" placeholder="Smith" value={surname} onChange={e => {
+                                        <input type="text" id="surname" placeholder="Smith" autoComplete="off" value={surname} onChange={e => {
                                             setSurname(e.currentTarget.value)
                                         }}/>
                                     </section>
                                     <section>
                                         <label htmlFor="department">Department: </label>
-                                        <input type="text" id="department" placeholder="IT" value={department} onChange={e => {
+                                        <input type="text" id="department" placeholder="IT" autoComplete="off" value={department} onChange={e => {
                                             setDepartment(e.currentTarget.value)
                                         }}/>
                                     </section>
                                     <section>
                                         <label htmlFor="salary">Salary: </label>
-                                        <input type="number" min="0" id="salary" placeholder="2000" value={salary} onChange={e => {
+                                        <input type="number" min="0" id="salary" placeholder="2000" autoComplete="off" value={salary} onChange={e => {
                                             setSalary(e.currentTarget.value)
                                         }}/>
                                     </section>
@@ -660,26 +769,26 @@
                 {!isWorkers && (
                 <div className="workers">
                     <h2>Workers</h2>
-                    <table border="1">
+                        <table border="1">
                         <tbody>
+                        <div>
                         {workerList.map((worker, index) => (
                             <tr key={index}>
                                 <td>{index + 1}.</td>
                                 <td>{worker.firstName}</td>
                                 <td>{worker.lastName}</td>
                                 <td>{worker.department}</td>
-                                <td>{worker.salary.amount} {worker.salary.currency}</td>
+                                <td className="salary">{worker.salary.amount} {worker.salary.currency}</td>
                                 <td className="trash" onClick={e =>{Delete(e)}}>
                                     <i className="fa-solid fa-trash-can tra"/>
                                 </td>
                             </tr>
                         ))}
+                        </div>
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colSpan="3"/>
-                            <td>Summary</td>
-                            <td>{salarySum} USD</td>
+                            <td className="workers_sum">Summary: {salarySum} USD</td>
                         </tr>
                         </tfoot>
                     </table>
@@ -688,19 +797,21 @@
                 {!isWorkers && (
                     <div className="departments">
                         <h2>Department salary</h2>
-                        <table border='1' className='department_salary'>
+                        <div>
+                            <table border='1' className='department_salary'>
                             <tbody>
                             {allDepartments.map((department, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>{index + 1}.</td>
                                         <td>{department}</td>
-                                        <td>{departmentSalary[index]} USD</td>
+                                        <td className="salary">{departmentSalary[index]} USD</td>
                                     </tr>
                                 )
                             })}
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 )}
                 {isVisible ? (
@@ -738,7 +849,7 @@
                                             </div>
                                             <span id="current_value"/>
                                         </div>
-                                        <button>SEARCH</button>
+                                        <button className="search_button">SEARCH</button>
                                     </form>
                                 </div>
                             ) : (
@@ -748,7 +859,8 @@
                             {isSearched && (
                                 <section className="searched_worker">
                                     <h2 className="search_title">Workers</h2>
-                                    <table border="1">
+                                    <div className="table_holder">
+                                        <table border="1">
                                         {searchedWorkers.map((worker,index)=>(
                                             <tr key={index}>
                                                 <td>{index + 1}.</td>
@@ -759,6 +871,7 @@
                                             </tr>
                                         ))}
                                     </table>
+                                    </div>
                                 </section>
                             )}
                         </div>
@@ -781,11 +894,16 @@
 
     const Hover = () => {
         const hint = document.querySelector('.todo');
-        hint.style.backgroundColor = '#ddbba6';
+        hint.style.backgroundColor = '#0E1722';
     }
     const Leave = () => {
         const hint = document.querySelector('.todo');
-        hint.style.backgroundColor = '#eeccb7';
+        hint.style.backgroundColor = '#1F2833';
+    }
+
+    const CloseBrowser = () => {
+        localStorage.removeItem('Workers');
+        window.close();
     }
 
     ReactDOM.render(
@@ -807,6 +925,9 @@
             </div>
             <div className="container">
                 <WorkerList/>
+            </div>
+            <div className="close_browser" onClick={CloseBrowser}>
+                <h3>Clear & Close</h3>
             </div>
         </div>,
         document.getElementById('app')
